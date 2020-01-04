@@ -9,6 +9,7 @@ Sub import()
     Dim destinationOutputColumnMasterFile As String
     Dim lastRowMasterFile As Long
     
+    Dim workbookUse As Boolean
     Dim importTab As String
     Dim importRange As String
     Dim folderPath As String
@@ -43,11 +44,11 @@ Sub import()
             End If
             
             'Open workbook
-            Workbooks(importFile).Sheets(importSheet).Activate
+            Workbooks(importFile).Sheets(importTab).Activate
             
             'Transfer Document Number data
             Workbooks(importFile).Worksheets(importTab).Range(importRange).Copy
-            Workbooks(masterFile).Worksheets(destinationTabMasterFile).Range(destinationOutputColumnMasterFile & lastRowMasterFile).Offset(1, 0).PasteSpecial xlPasteVal
+            Workbooks(masterFile).Worksheets(destinationTabMasterFile).Range(destinationOutputColumnMasterFile & lastRowMasterFile).Offset(1, 0).PasteSpecial xlPasteValuesAndNumberFormats
             
             'If workbook is in use: don't close workbook
             If workbookUse = False Then
