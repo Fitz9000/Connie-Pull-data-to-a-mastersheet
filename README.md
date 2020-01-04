@@ -20,18 +20,20 @@ Sub import()
     masterFile = ThisWorkbook.Name
     destinationTabMasterFile = "Put Values Here"                'tab you want to put data in
     destinationOutputColumnMasterFile = "A"                     'column to pull out put data once pulled
-    
-    lastRowMasterFile = LastRow(destinationOutputColumnMasterFile, destinationTabMasterFile)
+    With Workbooks(masterFile)
+        lastRowMasterFile = LastRow(destinationOutputColumnMasterFile, destinationTabMasterFile)
+    End With
     
     'Import File variables
-    folderPath = "C:\Users\cHo\some folder1\some folder2"       'folder path of the file where you want to get data from
-    importFile = "some spreadsheet.xlsx"                        'excel file that you want to grab data from
-    importTab = "Some tab name"                                 'tab that you want to get data from
+    'folderPath = "C:\Users\cHo\some folder1\some folder2"       'folder path of the file where you want to get data from
+    folderPath = "H:\"
+    importFile = "Hello Connie.xlsx"                            'excel file that you want to grab data from
+    importTab = "Come Find Me"                                  'tab that you want to get data from
     importRange = "A1"                                          'range where you want to get data from
     
     
     importPath = folderPath & importFile
-        
+
         'Check if import path exists
         If Dir(importPath, vbDirectory) <> "" Then
         
