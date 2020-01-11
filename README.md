@@ -17,26 +17,27 @@ Sub import()
     Dim importPath As String
     
     'Master File variables
-    masterFile = ThisWorkbook.Name
-    destinationTabMasterFile = "Put Values Here"                'tab you want to put data in
+    masterFile = ThisWorkbook.name
+    destinationTabMasterFile = "Quarterly Results"              'tab you want to put data in
     destinationOutputColumnMasterFile = "A"                     'column to pull out put data once pulled
     With Workbooks(masterFile)
         lastRowMasterFile = LastRow(destinationOutputColumnMasterFile, destinationTabMasterFile)
     End With
     
     'Import File variables
-    'folderPath = "C:\Users\cHo\some folder1\some folder2"       'folder path of the file where you want to get data from
-    folderPath = "H:\"
+    folderPath = "C:\Users\Brad\Desktop\New folder\"            'folder path of the file where you want to get data from
     importFile = "Hello Connie.xlsx"                            'excel file that you want to grab data from
     importTab = "Come Find Me"                                  'tab that you want to get data from
     importRange = "A1"                                          'range where you want to get data from
     
-    
     importPath = folderPath & importFile
-
+    
         'Check if import path exists
         If Dir(importPath, vbDirectory) <> "" Then
         
+            Application.AskToUpdateLinks = False
+            Application.DisplayAlerts = False
+            
             'Check if workbook is already open/in use
             If IsWorkBookOpen(importPath) Then
                 workbookUse = True
@@ -56,7 +57,10 @@ Sub import()
             If workbookUse = False Then
                 Workbooks(importFile).Close
             End If
-        
+            
+            Application.AskToUpdateLinks = True
+            Application.DisplayAlerts = True
+            
         Else
             MsgBox "Import path: " & importPath & " could not be found" _
                 , vbExclamation, "Import Error"
